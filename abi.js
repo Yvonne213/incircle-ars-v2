@@ -1,47 +1,55 @@
 
-var contractAddress = "0x34191f84b62ED43FE8407Af4bed4d591Eba5B307";
+var contractAddress = "0xcD6a42782d230D7c13A74ddec5dD140e55499Df9";
 var contractABI = [
 	{
-		"anonymous": false,
-		"inputs": [
-			{
-				"indexed": false,
-				"internalType": "string",
-				"name": "artistName",
-				"type": "string"
-			},
-			{
-				"indexed": false,
-				"internalType": "bytes32",
-				"name": "hashedName",
-				"type": "bytes32"
-			}
-		],
-		"name": "getInSuccessfully",
-		"type": "event"
-	},
-	{
 		"inputs": [
 			{
 				"internalType": "string",
-				"name": "_realname",
+				"name": "name",
 				"type": "string"
 			}
 		],
-		"name": "nameInput",
+		"name": "addName",
 		"outputs": [],
 		"stateMutability": "nonpayable",
 		"type": "function"
 	},
 	{
-		"inputs": [],
-		"name": "getCurrentInCircleArtist",
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "cleartextNames",
 		"outputs": [
 			{
 				"internalType": "string",
 				"name": "",
 				"type": "string"
-			},
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "getMostRecentCleartextName",
+		"outputs": [
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "getMostRecentHashedName",
+		"outputs": [
 			{
 				"internalType": "bytes32",
 				"name": "",
@@ -52,26 +60,19 @@ var contractABI = [
 		"type": "function"
 	},
 	{
-		"inputs": [],
-		"name": "getHashedName",
-		"outputs": [
+		"inputs": [
 			{
-				"internalType": "bytes32[]",
-				"name": "",
-				"type": "bytes32[]"
+				"internalType": "bytes32",
+				"name": "hash",
+				"type": "bytes32"
 			}
 		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "getNames",
+		"name": "getNameByHash",
 		"outputs": [
 			{
-				"internalType": "string[]",
+				"internalType": "string",
 				"name": "",
-				"type": "string[]"
+				"type": "string"
 			}
 		],
 		"stateMutability": "view",
@@ -91,25 +92,6 @@ var contractABI = [
 				"internalType": "bytes32",
 				"name": "",
 				"type": "bytes32"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"name": "nameList",
-		"outputs": [
-			{
-				"internalType": "string",
-				"name": "",
-				"type": "string"
 			}
 		],
 		"stateMutability": "view",
