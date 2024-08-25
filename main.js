@@ -154,18 +154,18 @@ async function main() {
       // Create the table dynamically
       const table = document.createElement("table");
       const headerRow = table.insertRow(0);
-      const artistHeader = headerRow.insertCell(0);
-      artistHeader.innerHTML = "Artist";
-      artistHeader.className = "header-artist"; // Apply CSS class
+      const hashHeader = headerRow.insertCell(0);
+      // artistHeader.innerHTML = "Artist";
+      // artistHeader.className = "header-artist"; // Apply CSS class
 
-      const hashHeader = headerRow.insertCell(1);
+      // const hashHeader = headerRow.insertCell(1);
       hashHeader.innerHTML = "NameHash";
       hashHeader.className = "header-hash"; // Apply CSS class
 
-      for (let i = 0; i < names.length; i++) {
+      for (let i = 0; i < hashes.length; i++) {
         const row = table.insertRow(i + 1);
-        row.insertCell(0).innerHTML = names[i];
-        row.insertCell(1).innerHTML = hashes[i];
+        // row.insertCell(0).innerHTML = names[i];
+        row.insertCell(0).innerHTML = hashes[i];
       }
 
       // Display the table in the HTML

@@ -192,11 +192,12 @@ canvas {
   border: #fac1c1;
   border-style: solid;
   border-width:2px;
-  width:890px;
+  width:880px;
 }
 #label{ 
   text-align: left;
-  font-family:poppins, sans-serif;font-weight: 300; font-style: normal;
+  font-family:poppins, sans-serif;font-weight: 400; font-style: normal;
+  color:rgb(195, 114, 114);
 }
 #getHashInput{
   text-align: left;
@@ -206,23 +207,21 @@ canvas {
   font-family:poppins, sans-serif;font-weight: 300; font-style: normal;
   width: 63%;
 }
-#getHashInput[type=text]:focus{
-  background: transparent;
-}
+
  #getArtistButton{
-  background-color: rgba(255, 158, 79, 0.323); 
+  background-color: rgba(255, 255, 255, 0.323); 
   color: black; 
-  border: 2px solid #ffffff00;
+  border: none;
   cursor: pointer;
-  padding: 0.5em 1em;
-  border-radius: 15px;
   font-family:poppins, sans-serif;font-weight: 300; font-style: normal;
+  font-size: 1em;
  }
 
  #getArtistButton:hover{
-  background-color: rgba(255, 158, 79, 0.323);
-  color: black;
-  box-shadow: 0px 3px 15px 0px rgba(153, 90, 1, 0.24), 0px 3px 15px 0px rgba(255, 87, 87, 0.19);
+  background-color: rgba(255, 255, 255, 0.323);
+  color: rgb(192, 45, 43);
+  font-weight: 400;
+
 }
 
 #artistResult{
@@ -237,11 +236,13 @@ table {
   border-style: solid;
   border-width:2px;
   margin-top: 40px;
+  margin-bottom: 40px;
   padding: 15px;
   ;
 }
 td {
   height: 20px;
+  padding-top: 10px;
 }
 /*Form*/
 #form {
