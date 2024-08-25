@@ -18,44 +18,44 @@
   <script src="https://kit.fontawesome.com/b0f18ca6d6.js" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.5.0/p5.js"></script>
   <link rel="stylesheet" href="https://use.typekit.net/zno4kzf.css">
-<script>try{Typekit.load({ async: true });}catch(e){}</script>
-<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.4.0/dist/confetti.browser.min.js"></script>
+  <script>try { Typekit.load({ async: true }); } catch (e) { }</script>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.4.0/dist/confetti.browser.min.js"></script>
 
   <link rel="stylesheet" type="text/css" href="style.css">
 
   <title>In Circle Artist</title>
   <style>
-   
+
   </style>
 </head>
 
 <body>
- 
+
   <!---------connection status----------->
   <div class="button-container" style="font-family:poppins, sans-serif;font-weight: 300; font-style: normal;">
-    <strong><small>Status:</small></strong>
-    <span id="connectionStatus"><small>🔴 Not connected</small></span>
+    <!-- <strong><small>Status:</small></strong> -->
+    <!-- <span id="connectionStatus"><small>🔴 Not connected</small></span> -->
 
-    <strong><small>Connected Wallet <ins></ins>:</small></strong>
-    <span id="connectedWallet"><small>[No wallet connected]</small></span>
+    <!-- <strong><small>Connected Wallet <ins></ins>:</small></strong> -->
+    <!-- <span id="connectedWallet"><small>[No wallet connected]</small></span> -->
 
 
-    <button id="connectButton">Connect</button>
+    <!-- <button id="connectButton">Connect</button> -->
     <span id="loadingIconConnect" class="loading-icon"></span>
   </div>
-    <!--↑↑↑--connection status↑↑↑------>
+  <!--↑↑↑--connection status↑↑↑------>
 
- <!---------main part----------->
- <h1>Anyone can be an in-circle Artist</h1>
- <p class="tips">Note: This version is not the original website.</p>
- <p class="tips">*This version includes minor adjustments designed for public access.</p>
+  <!---------main part----------->
+  <h1>Anyone can be an in-circle Artist</h1>
+  <p class="tips">Note: This version is not the original website.</p>
+  <p class="tips">*This version includes minor adjustments designed for public access.</p>
 
   <!-- <p style="margin-top: -20px; color:rgb(208, 208, 208);">Know more about this DApp, please check the White paper. (right top corner)</p> -->
 
   <!--prompt-->
   <div class="prompt">
     <p>Enter Your Name: </p>
-    
+
   </div>
   <!--....................................-->
   <!--posiontioning!!!!!-->
@@ -68,7 +68,8 @@
   enter the name they want to set -->
     <div id="two">
       <div>
-        <input style="font-family:poppins, sans-serif;font-weight: 300; font-style: normal;" type="text" name="setArtistInput" id="setArtistInput" placeholder="YOUR NAME...">
+        <input style="font-family:poppins, sans-serif;font-weight: 300; font-style: normal;" type="text"
+          name="setArtistInput" id="setArtistInput" placeholder="YOUR NAME...">
       </div>
 
       <!--....................................-->
@@ -76,23 +77,26 @@
       <!--button-->
       <div><button id="setArtistButton" style="margin-top:260px;">Enter Artists' Circle</button></div>
 
-     
+
       <!--form parts-->
       <div id="form">
-        <p style="margin:10px; font-size:1.2em;font-family:poppins, sans-serif;font-weight: 300; font-style: normal;">Current Artists in Circle
+        <p style="margin:10px; font-size:1.2em;font-family:poppins, sans-serif;font-weight: 300; font-style: normal;">
+          Current Artists in Circle
         </p>
         <p style="margin-bottom:10px;font-family:poppins, sans-serif;font-weight: 300; font-style: normal;">
           <a href="https://sepolia.etherscan.io/address/0x34191f84b62ED43FE8407Af4bed4d591Eba5B307">view contract</a>
         </p>
 
         <!-- Input for retrieving artist name by hash -->
-    <input type="text" id="getHashInput" placeholder="Enter Hash">
-    <button id="getArtistButton">Get Artist Name</button>
-    
-    <!-- Display the result artist name -->
-    <div id="artistResult"></div>
+        <div id="search">
+        <label for="fname" id="label">HashName Search:</label>
+        <input type="text" id="getHashInput" placeholder="Copy Hash below eg: 0x...">
+        <button id="getArtistButton">Get Artist Name</button>
 
-    
+        <!-- Display the result artist name -->
+        <div id="artistResult"></div>
+      </div>
+
         <div id="currentArtist" style="font-family:poppins, sans-serif;font-weight: 300; font-style: normal;">
         </div>
       </div>

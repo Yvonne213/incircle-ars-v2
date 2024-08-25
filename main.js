@@ -64,10 +64,10 @@ async function main() {
 
   // AT THIS POINT, THE USER SHOULD BE SUCCESSFULLY CONNECTED TO THE DAPP
 
-  // Update the page to show the user is connected
-  connectionStatus.textContent = "🟢 Connected";
+  // // Update the page to show the user is connected
+  // connectionStatus.textContent = "🟢 Connected";
 
-  connectButton.setAttribute("disabled", "true");
+  // connectButton.setAttribute("disabled", "true");
   //...............up is connection issues......................................//
 
   // MetaMask is our 'provider' in this case
@@ -85,140 +85,142 @@ async function main() {
 
   //......................................connection issues.....................
   // Display the address of the signed-in wallet
-  const connectedWalletAddress = await signer.getAddress();
-  connectedWallet.textContent = connectedWalletAddress;
-  console.log(`Connected Wallet: ${connectedWalletAddress}`);
+  // const connectedWalletAddress = await signer.getAddress();
+  // connectedWallet.textContent = connectedWalletAddress;
+  // console.log(`Connected Wallet: ${connectedWalletAddress}`);
 
 
   // hide the loading icon
   loadingIconConnect.style.display = "none";
 
-  
-    // Automatically display the table with existing names and hashes
-    await getNamesAndHashes();
 
- // Add event listener to the button
- $('#setArtistButton').click(async function () {
-  await setInfo();
+  // Automatically display the table with existing names and hashes
   await getNamesAndHashes();
-});
 
-// Function to add a name and hash it on the blockchain
-async function setInfo() {
-  try {
-    // Get the name from the input field
-    const nameToSet = $('#setArtistInput').val();
+  // Add event listener to the button
+  $('#setArtistButton').click(async function () {
+    await setInfo();
+    await getNamesAndHashes();
+  });
 
-    // Ensure the name is not empty
-    if (nameToSet.trim() === "") {
-      alert("Please enter a valid name.");
-      return;
+  // Function to add a name and hash it on the blockchain
+  async function setInfo() {
+    try {
+      // Get the name from the input field
+      const nameToSet = $('#setArtistInput').val();
+
+      // Ensure the name is not empty
+      if (nameToSet.trim() === "") {
+        alert("Please enter a valid name.");
+        return;
+      }
+
+      // Call the smart contract function to hash and store the name
+      const tx = await contractWithSigner.nameInput(nameToSet);
+      await tx.wait();
+
+      console.log(`Name "${nameToSet}" added and hashed.`);
+      // Clear the input field after the name is added
+      $('#setArtistInput').val('');
+
+      // Trigger the firework animation
+      confetti({
+        particleCount: 100,
+        spread: 70,
+        origin: { y: 0.6 }
+      });
+
+      // Show a simple popup message (optional)
+      alert("Congrats! You have successfully entered Artist's Circle!");
+
+    } catch (error) {
+      console.error("Error setting name:", error);
+      alert("Failed to add the name. Please try again.");
     }
-
-    // Call the smart contract function to hash and store the name
-    const tx = await contractWithSigner.nameInput(nameToSet);
-    await tx.wait();
-
-    console.log(`Name "${nameToSet}" added and hashed.`);
- // Clear the input field after the name is added
- $('#setArtistInput').val('');
-
-// Trigger the firework animation
-confetti({
-  particleCount: 100,
-  spread: 70,
-  origin: { y: 0.6 }
-});
-
-// Show a simple popup message (optional)
-alert("Congrats! You have successfully entered Artist's Circle!");
-
-  } catch (error) {
-    console.error("Error setting name:", error);
-    alert("Failed to add the name. Please try again.");
   }
-}
 
-// Function to retrieve and display names and their hashes
-async function getNamesAndHashes() {
-  try {
-    // Get the names and hashed names from the contract
-    const names = await contract.getNames();
-    const hashes = await contract.getHashedName();
+  // Function to retrieve and display names and their hashes
+  async function getNamesAndHashes() {
+    try {
+      // Get the names and hashed names from the contract
+      const names = await contract.getNames();
+      const hashes = await contract.getHashedName();
 
-    if (names.length === 0) {
-      console.log("No names have been added yet.");
-      return;
+      if (names.length === 0) {
+        console.log("No names have been added yet.");
+        return;
+      }
+
+      // Create the table dynamically
+      const table = document.createElement("table");
+      const headerRow = table.insertRow(0);
+      const artistHeader = headerRow.insertCell(0);
+      artistHeader.innerHTML = "Artist";
+      artistHeader.className = "header-artist"; // Apply CSS class
+
+      const hashHeader = headerRow.insertCell(1);
+      hashHeader.innerHTML = "NameHash";
+      hashHeader.className = "header-hash"; // Apply CSS class
+
+      for (let i = 0; i < names.length; i++) {
+        const row = table.insertRow(i + 1);
+        row.insertCell(0).innerHTML = names[i];
+        row.insertCell(1).innerHTML = hashes[i];
+      }
+
+      // Display the table in the HTML
+      document.getElementById("currentArtist").innerHTML = "";
+      document.getElementById("currentArtist").appendChild(table);
+
+    } catch (error) {
+      console.error("Error retrieving names and hashes:", error);
+      alert("Failed to retrieve names and hashes. Please try again.");
     }
-
-    // Create the table dynamically
-    const table = document.createElement("table");
-    const headerRow = table.insertRow(0);
-    const artistHeader = headerRow.insertCell(0);
-    artistHeader.innerHTML = "Artist";
-    artistHeader.className = "header-artist"; // Apply CSS class
-    
-    const hashHeader = headerRow.insertCell(1);
-    hashHeader.innerHTML = "NameHash";
-    hashHeader.className = "header-hash"; // Apply CSS class
-
-    for (let i = 0; i < names.length; i++) {
-      const row = table.insertRow(i + 1);
-      row.insertCell(0).innerHTML = names[i];
-      row.insertCell(1).innerHTML = hashes[i];
-    }
-
-    // Display the table in the HTML
-    document.getElementById("currentArtist").innerHTML = "";
-    document.getElementById("currentArtist").appendChild(table);
-
-  } catch (error) {
-    console.error("Error retrieving names and hashes:", error);
-    alert("Failed to retrieve names and hashes. Please try again.");
   }
-}
 
-$('#getArtistButton').click(async function () {
-  await getArtistNameByHash();
-});
-console.log("Button clicked, getArtistNameByHash function called");
+  $('#getArtistButton').click(async function () {
+    await getArtistNameByHash();
+  });
+  console.log("Button clicked, getArtistNameByHash function called");
 
-async function getArtistNameByHash() {
-  try {
-    console.log("getArtistNameByHash function triggered");
-
-    // Get the hash from the input field
-    const hashToLookup = $('#getHashInput').val();
-
-    // Ensure the hash is not empty
-    if (hashToLookup.trim() === "") {
-      alert("Please enter a valid hash.");
-      return;
+  async function getArtistNameByHash() {
+    try {
+      console.log("getArtistNameByHash function triggered");
+  
+      // Get the hash from the input field
+      const hashToLookup = $('#getHashInput').val();
+  
+      // Ensure the hash is not empty
+      if (hashToLookup.trim() === "") {
+        alert("Please enter a valid hash.");
+        return;
+      }
+  
+      // Convert the input to bytes32
+      const bytes32Hash = ethers.utils.hexlify(ethers.utils.arrayify(hashToLookup));
+      console.log("Converted Hash:", bytes32Hash);
+  
+      // Call the smart contract function to get the name by hash
+      const artistName = await contract.getNameByHash(bytes32Hash);
+      console.log("Artist Name Retrieved:", artistName);
+  
+      // Display the result
+      const artistResultElement = $('#artistResult');
+      if (artistName) {
+        artistResultElement.text(`Artist Name: ${artistName}`);
+      } else {
+        artistResultElement.text("No artist name found for this hash.");
+      }
+  
+      // Add padding once the result is available
+      artistResultElement.css('padding', '15px');
+  
+    } catch (error) {
+      console.error("Error retrieving artist name by hash:", error);
+      alert("Failed to retrieve the artist name. Please try again.");
     }
-
-    // Convert the input to bytes32
-    const bytes32Hash = ethers.utils.hexlify(ethers.utils.arrayify(hashToLookup));
-    console.log("Converted Hash:", bytes32Hash);
-
-    // Call the smart contract function to get the name by hash
-    const artistName = await contract.getNameByHash(bytes32Hash);
-    console.log("Artist Name Retrieved:", artistName);
-
-    // Display the result
-    if (artistName) {
-      $('#artistResult').text(`Artist Name: ${artistName}`);
-    } else {
-      $('#artistResult').text("No artist name found for this hash.");
-    }
- // Clear the input field after displaying the result
- $('#getHashInput').val('');
-  } catch (error) {
-    console.error("Error retrieving artist name by hash:", error);
-    alert("Failed to retrieve the artist name. Please try again.");
   }
-}
-
-
+  
 }
 
 
