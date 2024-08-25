@@ -33,14 +33,14 @@
  
   <!---------connection status----------->
   <div class="button-container" style="font-family:poppins, sans-serif;font-weight: 300; font-style: normal;">
-    <!-- <strong><small>Status:</small></strong> -->
-    <!-- <span id="connectionStatus"><small>🔴 Not connected</small></span> -->
-<!-- 
-    <strong><small>Connected Wallet <ins></ins>:</small></strong> -->
-    <!-- <span id="connectedWallet"><small>[No wallet connected]</small></span> -->
+    <strong><small>Status:</small></strong>
+    <span id="connectionStatus"><small>🔴 Not connected</small></span>
+
+    <strong><small>Connected Wallet <ins></ins>:</small></strong>
+    <span id="connectedWallet"><small>[No wallet connected]</small></span>
 
 
-    <!-- <button id="connectButton">Connect</button> -->
+    <button id="connectButton">Connect</button>
     <span id="loadingIconConnect" class="loading-icon"></span>
   </div>
     <!--↑↑↑--connection status↑↑↑------>
@@ -84,6 +84,15 @@
         <p style="margin-bottom:10px;font-family:poppins, sans-serif;font-weight: 300; font-style: normal;">
           <a href="https://sepolia.etherscan.io/address/0x34191f84b62ED43FE8407Af4bed4d591Eba5B307">view contract</a>
         </p>
+
+        <!-- Input for retrieving artist name by hash -->
+    <input type="text" id="getHashInput" placeholder="Enter Hash">
+    <button id="getArtistButton">Get Artist Name</button>
+    
+    <!-- Display the result artist name -->
+    <div id="artistResult"></div>
+
+    
         <div id="currentArtist" style="font-family:poppins, sans-serif;font-weight: 300; font-style: normal;">
         </div>
       </div>

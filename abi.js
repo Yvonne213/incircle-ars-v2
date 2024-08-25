@@ -1,59 +1,51 @@
 
-var contractAddress = "0xcD6a42782d230D7c13A74ddec5dD140e55499Df9";
+var contractAddress = "0xfBD48C02170e363564b7eaF695030aae2815aA32";
 var contractABI = [
 	{
+		"anonymous": false,
 		"inputs": [
 			{
+				"indexed": false,
 				"internalType": "string",
-				"name": "name",
+				"name": "artistName",
 				"type": "string"
-			}
-		],
-		"name": "addName",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
+			},
 			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
+				"indexed": false,
+				"internalType": "bytes32",
+				"name": "hashedName",
+				"type": "bytes32"
 			}
 		],
-		"name": "cleartextNames",
-		"outputs": [
-			{
-				"internalType": "string",
-				"name": "",
-				"type": "string"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
+		"name": "getInSuccessfully",
+		"type": "event"
 	},
 	{
 		"inputs": [],
-		"name": "getMostRecentCleartextName",
+		"name": "getCurrentInCircleArtist",
 		"outputs": [
 			{
 				"internalType": "string",
 				"name": "",
 				"type": "string"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "getMostRecentHashedName",
-		"outputs": [
+			},
 			{
 				"internalType": "bytes32",
 				"name": "",
 				"type": "bytes32"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "getHashedName",
+		"outputs": [
+			{
+				"internalType": "bytes32[]",
+				"name": "",
+				"type": "bytes32[]"
 			}
 		],
 		"stateMutability": "view",
@@ -79,6 +71,19 @@ var contractABI = [
 		"type": "function"
 	},
 	{
+		"inputs": [],
+		"name": "getNames",
+		"outputs": [
+			{
+				"internalType": "string[]",
+				"name": "",
+				"type": "string[]"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
 		"inputs": [
 			{
 				"internalType": "uint256",
@@ -92,6 +97,38 @@ var contractABI = [
 				"internalType": "bytes32",
 				"name": "",
 				"type": "bytes32"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "_realname",
+				"type": "string"
+			}
+		],
+		"name": "nameInput",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "nameList",
+		"outputs": [
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
 			}
 		],
 		"stateMutability": "view",

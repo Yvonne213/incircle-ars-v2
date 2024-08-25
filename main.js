@@ -65,9 +65,9 @@ async function main() {
   // AT THIS POINT, THE USER SHOULD BE SUCCESSFULLY CONNECTED TO THE DAPP
 
   // Update the page to show the user is connected
-  // connectionStatus.textContent = "🟢 Connected";
+  connectionStatus.textContent = "🟢 Connected";
 
-  // connectButton.setAttribute("disabled", "true");
+  connectButton.setAttribute("disabled", "true");
   //...............up is connection issues......................................//
 
   // MetaMask is our 'provider' in this case
@@ -85,9 +85,9 @@ async function main() {
 
   //......................................connection issues.....................
   // Display the address of the signed-in wallet
-  // const connectedWalletAddress = await signer.getAddress();
-  // connectedWallet.textContent = connectedWalletAddress;
-  // console.log(`Connected Wallet: ${connectedWalletAddress}`);
+  const connectedWalletAddress = await signer.getAddress();
+  connectedWallet.textContent = connectedWalletAddress;
+  console.log(`Connected Wallet: ${connectedWalletAddress}`);
 
 
   // hide the loading icon
@@ -177,6 +177,48 @@ async function getNamesAndHashes() {
     alert("Failed to retrieve names and hashes. Please try again.");
   }
 }
+
+$('#getArtistButton').click(async function () {
+  await getArtistNameByHash();
+});
+console.log("Button clicked, getArtistNameByHash function called");
+
+async function getArtistNameByHash() {
+  try {
+    console.log("getArtistNameByHash function triggered");
+
+    // Get the hash from the input field
+    const hashToLookup = $('#getHashInput').val();
+
+    // Ensure the hash is not empty
+    if (hashToLookup.trim() === "") {
+      alert("Please enter a valid hash.");
+      return;
+    }
+
+    // Convert the input to bytes32
+    const bytes32Hash = ethers.utils.hexlify(ethers.utils.arrayify(hashToLookup));
+    console.log("Converted Hash:", bytes32Hash);
+
+    // Call the smart contract function to get the name by hash
+    const artistName = await contract.getNameByHash(bytes32Hash);
+    console.log("Artist Name Retrieved:", artistName);
+
+    // Display the result
+    if (artistName) {
+      $('#artistResult').text(`Artist Name: ${artistName}`);
+    } else {
+      $('#artistResult').text("No artist name found for this hash.");
+    }
+ // Clear the input field after displaying the result
+ $('#getHashInput').val('');
+  } catch (error) {
+    console.error("Error retrieving artist name by hash:", error);
+    alert("Failed to retrieve the artist name. Please try again.");
+  }
+}
+
+
 }
 
 
